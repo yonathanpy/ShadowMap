@@ -30,27 +30,27 @@ def use_tor():
 
 # Passive Recon
 def passive_recon(target):
-    print(f"🕵️ Performing passive reconnaissance on {target}...")
+    print(f" Performing passive reconnaissance on {target}...")
     try:
         response = requests.get(f"https://www.virustotal.com/vtapi/v2/domain/report?apikey=YOUR_API_KEY&domain={target}")
         data = response.json()
         print(f"🔍 Subdomains: {data.get('subdomains', 'None found')}")
     except:
-        print("❌ Error retrieving passive data.")
+        print(" Error retrieving passive data.")
 
 # Active Network Scanning
 def active_scan(target):
-    print(f"🚀 Performing active scan on {target}...")
+    print(f" Performing active scan on {target}...")
     for port in range(20, 1025):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(1)
         if not s.connect_ex((target, port)):
-            print(f"✅ Open port: {port}")
+            print(f" Open port: {port}")
         s.close()
 
 # Dark Web Crawling
 def dark_web_crawl(url):
-    print(f"🌑 Crawling dark web site {url}...")
+    print(f" Crawling dark web site {url}...")
     use_tor()
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -74,4 +74,4 @@ if __name__ == "__main__":
         start_tor()
         dark_web_crawl(args.target)
     else:
-        print("❌ Invalid mode! Use passive, active, or anon.")
+        print(" Invalid mode! Use passive, active, or anon.")
